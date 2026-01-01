@@ -9,7 +9,7 @@ public class PlayerCameraSpawner : NetworkBehaviour
     [HideInInspector]
     public Camera playerCameraSpawned;
 
-    public override void OnStartClient()    
+    void Start()    
     {
         if (!isOwned)
         {
