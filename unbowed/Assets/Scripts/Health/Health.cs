@@ -15,6 +15,12 @@ public class Health : NetworkBehaviour
 
     void Start()
     {
+        if (!isServer)
+        {
+            enabled = false;
+            return;
+        }
+
         curHealth = maxHealth;
 
         StartCoroutine(DeathRoutine());
