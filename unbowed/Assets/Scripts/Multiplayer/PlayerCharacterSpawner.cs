@@ -8,9 +8,10 @@ public class PlayerCharacterSpawner : NetworkBehaviour
     public NetworkIdentity playerObjectPrefab;
 
     [HideInInspector]
+    [SyncVar]
     public NetworkIdentity playerObjectSpawned;
 
-    void Start()
+    public override void OnStartServer()
     {
         Spawn();
         StartCoroutine(SpawnRoutine());
@@ -20,8 +21,9 @@ public class PlayerCharacterSpawner : NetworkBehaviour
     // TODO: randomly selected spawn positions
     void Spawn()
     {
-        playerObjectSpawned = Instantiate(playerObjectPrefab);
-        NetworkServer.Spawn(playerObjectSpawned.gameObject);
+        NetworkIdentity playerObjectSpawning = Instantiate(playerObjectPrefab);
+        NetworkServer.Spawn(playerObjectSpawning.gameObject, connectionToClient);
+        playerObjectSpawned = playerObjectSpawning;
     }
 
     IEnumerator SpawnRoutine()
