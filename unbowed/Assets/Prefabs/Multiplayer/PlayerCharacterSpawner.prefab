@@ -65,6 +65,6 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  spawnTime: 0.1
+  spawnTime: 1
   playerObjectPrefab: {fileID: 6036641969352806593, guid: 1c41c2ccb3610d643b97301b721b4d28, type: 3}
   playerObjectSpawned: {fileID: 0}
