@@ -17,7 +17,6 @@ public class PlayerCharacterSpawner : NetworkBehaviour
         StartCoroutine(SpawnRoutine());
     }
 
-
     // TODO: randomly selected spawn positions
     void Spawn()
     {

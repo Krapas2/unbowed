@@ -7,6 +7,9 @@ public class PlayerBow : NetworkBehaviour
     public PlayerArrow arrowPrefab;
     public Transform arrowOriginAxis;
     public Transform arrowOrigin;
+    [SyncVar]
+    public float damage;
+    [SyncVar]
     public float chargeTime;
     public float overchargeTime;
     public float overchargeSpread;
@@ -80,6 +83,7 @@ public class PlayerBow : NetworkBehaviour
         PlayerArrow spawningArrow = Instantiate(arrowPrefab, arrowOrigin.position, rotation);
         NetworkServer.Spawn(spawningArrow.gameObject);
         spawningArrow.speed *= Mathf.Min(1f, charge/chargeTime);
+        spawningArrow.damage = damage;
     }
 
     Quaternion ShotRotation(float charge)

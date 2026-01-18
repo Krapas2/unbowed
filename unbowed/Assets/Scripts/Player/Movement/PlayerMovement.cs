@@ -4,6 +4,7 @@ using Mirror;
 public class PlayerMovement : NetworkBehaviour
 {
     [Header("Walking")]
+    [SyncVar]
     public float walkSpeed;
     public float walkLerpSpeed;
 
@@ -11,6 +12,7 @@ public class PlayerMovement : NetworkBehaviour
     public float jumpForce;
 
     [Header("Air Gliding")]
+    [SyncVar]
     public float airAcceleration;
     public float airDamping;
 
