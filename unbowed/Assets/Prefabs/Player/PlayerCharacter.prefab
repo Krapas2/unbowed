@@ -492,8 +492,10 @@ MonoBehaviour:
   arrowOriginAxis: {fileID: 3483016978881891744}
   arrowOrigin: {fileID: 3362703648978141080}
   damage: 0.2
+  minSpeed: 10
+  maxSpeed: 35
   chargeTime: 0.3
-  overchargeTime: 1.5
+  overchargeTime: 1
   overchargeSpread: 15
   chargeSlowdown: 0.35
 --- !u!114 &-6565334597256837870

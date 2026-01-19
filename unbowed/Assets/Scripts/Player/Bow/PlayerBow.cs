@@ -9,6 +9,8 @@ public class PlayerBow : NetworkBehaviour
     public Transform arrowOrigin;
     [SyncVar]
     public float damage;
+    public float minSpeed;
+    public float maxSpeed;
     [SyncVar]
     public float chargeTime;
     public float overchargeTime;
@@ -82,13 +84,14 @@ public class PlayerBow : NetworkBehaviour
     {
         PlayerArrow spawningArrow = Instantiate(arrowPrefab, arrowOrigin.position, rotation);
         NetworkServer.Spawn(spawningArrow.gameObject);
-        spawningArrow.speed *= Mathf.Min(1f, charge/chargeTime);
+        spawningArrow.speed = Mathf.Lerp(minSpeed, maxSpeed, charge/chargeTime);
         spawningArrow.damage = damage;
+        spawningArrow.owner = gameObject;
     }
 
     Quaternion ShotRotation(float charge)
     {
-        Quaternion spread = charge >= overchargeTime ? 
+        Quaternion spread = charge >= chargeTime + overchargeTime ? 
             Quaternion.Euler(
                 Random.Range(-overchargeSpread, overchargeSpread), 
                 Random.Range(-overchargeSpread, overchargeSpread), 
