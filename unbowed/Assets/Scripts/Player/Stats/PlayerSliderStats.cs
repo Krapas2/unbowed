@@ -46,6 +46,7 @@ public class PlayerSliderStats : NetworkBehaviour
     void AssingHealth()
     {
         playerHealth.maxHealth = Mathf.Lerp(healthMin, healthMax, statsSliders.healthSlider.value);
+        playerHealth.curHealth = playerHealth.maxHealth;
     }
 
     void AssingMovement()
