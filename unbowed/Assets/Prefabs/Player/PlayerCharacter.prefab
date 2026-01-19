@@ -499,6 +499,7 @@ MonoBehaviour:
   overchargeTime: 1
   overchargeSpread: 15
   chargeSlowdown: 0.35
+  cooldown: 0.5
   currentCharge: 0
 --- !u!114 &-6565334597256837870
 MonoBehaviour:

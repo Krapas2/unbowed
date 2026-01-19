@@ -16,12 +16,14 @@ public class PlayerBow : NetworkBehaviour
     public float overchargeTime;
     public float overchargeSpread;
     public float chargeSlowdown;
+    public float cooldown;
 
     [HideInInspector]
     public float currentCharge;
 
     private float initialPlayerWalkSpeed;
     private float initialPlayerAirAcceleration;
+    private bool canFire;
 
     private PlayerMovement playerMovement;
 
@@ -30,6 +32,7 @@ public class PlayerBow : NetworkBehaviour
         playerMovement = GetComponent<PlayerMovement>();
         initialPlayerWalkSpeed = playerMovement.walkSpeed;
         initialPlayerAirAcceleration = playerMovement.airAcceleration;
+        canFire = true;
     }
 
 	void Start()
@@ -61,7 +64,7 @@ public class PlayerBow : NetworkBehaviour
 
     void ChargeBehaviour()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") && canFire)
         {
             StartCoroutine(ChargeRoutine());
         }
@@ -69,14 +72,16 @@ public class PlayerBow : NetworkBehaviour
 
     IEnumerator ChargeRoutine()
     {
-
         playerMovement.walkSpeed = initialPlayerWalkSpeed * chargeSlowdown;
         playerMovement.airAcceleration = initialPlayerAirAcceleration * chargeSlowdown;
+
+        StartCoroutine(CooldownRoutine());
         while (Input.GetButton("Fire1"))
         {
             currentCharge += Time.deltaTime;
             yield return null;
         }
+        
         playerMovement.walkSpeed = initialPlayerWalkSpeed;
         playerMovement.airAcceleration = initialPlayerAirAcceleration;
         
@@ -103,5 +108,12 @@ public class PlayerBow : NetworkBehaviour
                 0f) :
             Quaternion.identity;
         return arrowOrigin.rotation * spread;
+    }
+
+    IEnumerator CooldownRoutine()
+    {
+        canFire = false;
+        yield return new WaitForSeconds(cooldown);
+        canFire = true;
     }
 }
