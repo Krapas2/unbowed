@@ -17,9 +17,11 @@ public class PlayerBow : NetworkBehaviour
     public float overchargeSpread;
     public float chargeSlowdown;
 
+    [HideInInspector]
+    public float currentCharge;
+
     private float initialPlayerWalkSpeed;
     private float initialPlayerAirAcceleration;
-
 
     private PlayerMovement playerMovement;
 
@@ -37,6 +39,8 @@ public class PlayerBow : NetworkBehaviour
             enabled = false;
             return;
         }
+        
+        currentCharge = 0;
     }
 
     void Update()
@@ -65,18 +69,19 @@ public class PlayerBow : NetworkBehaviour
 
     IEnumerator ChargeRoutine()
     {
-        float charge = 0;
 
         playerMovement.walkSpeed = initialPlayerWalkSpeed * chargeSlowdown;
         playerMovement.airAcceleration = initialPlayerAirAcceleration * chargeSlowdown;
         while (Input.GetButton("Fire1"))
         {
-            charge += Time.deltaTime;
+            currentCharge += Time.deltaTime;
             yield return null;
         }
         playerMovement.walkSpeed = initialPlayerWalkSpeed;
         playerMovement.airAcceleration = initialPlayerAirAcceleration;
-        Shoot(charge, ShotRotation(charge));
+        
+        Shoot(currentCharge, ShotRotation(currentCharge));
+        currentCharge = 0;
     }
 
     [Command]

@@ -45,22 +45,17 @@ public class PlayerSliderStats : NetworkBehaviour
 
     void AssingHealth()
     {
-        Debug.Log("maxHealth assigned:" + Mathf.Lerp(healthMin, healthMax, statsSliders.healthSlider.value));
         playerHealth.maxHealth = Mathf.Lerp(healthMin, healthMax, statsSliders.healthSlider.value);
     }
 
     void AssingMovement()
     {
-        Debug.Log("walkSpeed assigned:" + Mathf.Lerp(speedMin, speedMax, statsSliders.speedSlider.value));
-        Debug.Log("airAcceleration assigned:" + Mathf.Lerp(glideMin, glideMax, statsSliders.speedSlider.value));
         playerMovement.walkSpeed = Mathf.Lerp(speedMin, speedMax, statsSliders.speedSlider.value);
         playerMovement.airAcceleration = Mathf.Lerp(glideMin, glideMax, statsSliders.speedSlider.value);
     }
 
     void AssingBow()
     {
-        Debug.Log("damage assigned:" + Mathf.Lerp(damageMin, damageMax, statsSliders.damageSlider.value));
-        Debug.Log("chargeTime assigned:" + Mathf.Lerp(chargeMin, chargeMax, statsSliders.chargeSlider.value));
         playerBow.damage = Mathf.Lerp(damageMin, damageMax, statsSliders.damageSlider.value);
         playerBow.chargeTime = Mathf.Lerp(chargeMin, chargeMax, statsSliders.chargeSlider.value);
     }

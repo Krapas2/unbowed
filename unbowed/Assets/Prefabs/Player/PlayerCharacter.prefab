@@ -269,6 +269,7 @@ GameObject:
   - component: {fileID: 3422064638430944250}
   - component: {fileID: 6010464711808315676}
   - component: {fileID: -6565334597256837870}
+  - component: {fileID: 7127428152455267314}
   m_Layer: 3
   m_Name: PlayerCharacter
   m_TagString: Untagged
@@ -498,6 +499,7 @@ MonoBehaviour:
   overchargeTime: 1
   overchargeSpread: 15
   chargeSlowdown: 0.35
+  currentCharge: 0
 --- !u!114 &-6565334597256837870
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -524,5 +526,23 @@ MonoBehaviour:
   playerBow: {fileID: 6010464711808315676}
   damageMin: 10
   damageMax: 30
-  chargeMin: 2
-  chargeMax: 0.25
+  chargeMin: 1.5
+  chargeMax: 0.5
+--- !u!114 &7127428152455267314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8095330343335919752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8046482e3f5b5a48bc10113531b5ab2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  playerHealth: {fileID: -1124821288029060814}
+  playerBow: {fileID: 6010464711808315676}
+  guiPrefab: {fileID: 5196562531457065854, guid: 24bcfccfedf508e45ac5e071c7d23d69, type: 3}
