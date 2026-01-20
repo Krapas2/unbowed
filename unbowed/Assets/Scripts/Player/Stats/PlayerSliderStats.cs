@@ -59,5 +59,6 @@ public class PlayerSliderStats : NetworkBehaviour
     {
         playerBow.damage = Mathf.Lerp(damageMin, damageMax, statsSliders.damageSlider.value);
         playerBow.chargeTime = Mathf.Lerp(chargeMin, chargeMax, statsSliders.chargeSlider.value);
+        playerBow.CacheInitialMovementValues();
     }
 }

@@ -30,8 +30,7 @@ public class PlayerBow : NetworkBehaviour
     void Awake()
     {
         playerMovement = GetComponent<PlayerMovement>();
-        initialPlayerWalkSpeed = playerMovement.walkSpeed;
-        initialPlayerAirAcceleration = playerMovement.airAcceleration;
+        CacheInitialMovementValues();
         canFire = true;
     }
 
@@ -115,5 +114,11 @@ public class PlayerBow : NetworkBehaviour
         canFire = false;
         yield return new WaitForSeconds(cooldown);
         canFire = true;
+    }
+
+    public void CacheInitialMovementValues()
+    {
+        initialPlayerWalkSpeed = playerMovement.walkSpeed;
+        initialPlayerAirAcceleration = playerMovement.airAcceleration;
     }
 }
