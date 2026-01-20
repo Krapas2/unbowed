@@ -24,12 +24,6 @@ public class PlayerSliderStats : NetworkBehaviour
 
     void Start()
     {
-        if (!isOwned)
-        {
-            enabled = false;
-            return;
-        }
-
         statsSliders = StatsSliders.Instance;
         
         if (statsSliders == null)
@@ -38,27 +32,58 @@ public class PlayerSliderStats : NetworkBehaviour
             return;
         }
 
-        AssingHealth();
-        AssingMovement();
-        AssingBow();
+        if (!isOwned)
+        {
+            enabled = false;
+            return;
+        }
+
+        AssignValues(
+            statsSliders.healthSlider.value,
+            statsSliders.speedSlider.value,
+            statsSliders.damageSlider.value,
+            statsSliders.chargeSlider.value
+        );
     }
 
-    void AssingHealth()
+    [Command]
+    void AssignValues(
+        float healthValue,
+        float speedValue,
+        float damageValue,
+        float chargeValue)
     {
-        playerHealth.maxHealth = Mathf.Lerp(healthMin, healthMax, statsSliders.healthSlider.value);
+        float summedValues = healthValue + speedValue + damageValue + chargeValue;
+        bool valuesAreInvalid = summedValues > statsSliders.maxPoints;
+        if (valuesAreInvalid)
+        {
+            connectionToClient.Disconnect();
+            return;
+        }
+        AssingHealth(healthValue);
+        AssingMovement(speedValue);
+        AssingBow(damageValue, chargeValue);
+    }
+
+    [Server]
+    void AssingHealth(float healthValue)
+    {
+        playerHealth.maxHealth = Mathf.Lerp(healthMin, healthMax, healthValue);
         playerHealth.curHealth = playerHealth.maxHealth;
     }
 
-    void AssingMovement()
+    [Server]
+    void AssingMovement(float speedValue)
     {
-        playerMovement.walkSpeed = Mathf.Lerp(speedMin, speedMax, statsSliders.speedSlider.value);
+        playerMovement.walkSpeed = Mathf.Lerp(speedMin, speedMax, speedValue);
         playerMovement.airAcceleration = Mathf.Lerp(glideMin, glideMax, statsSliders.speedSlider.value);
     }
 
-    void AssingBow()
+    [Server]
+    void AssingBow(float damageValue, float chargeValue)
     {
-        playerBow.damage = Mathf.Lerp(damageMin, damageMax, statsSliders.damageSlider.value);
-        playerBow.chargeTime = Mathf.Lerp(chargeMin, chargeMax, statsSliders.chargeSlider.value);
+        playerBow.damage = Mathf.Lerp(damageMin, damageMax, damageValue);
+        playerBow.chargeTime = Mathf.Lerp(chargeMin, chargeMax, chargeValue);
         playerBow.CacheInitialMovementValues();
     }
 }
