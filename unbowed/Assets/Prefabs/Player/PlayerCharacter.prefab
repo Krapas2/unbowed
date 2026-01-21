@@ -517,16 +517,16 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   playerHealth: {fileID: -1124821288029060814}
-  healthMin: 5
-  healthMax: 50
+  healthMin: 10
+  healthMax: 30
   playerMovement: {fileID: 3422064638430944250}
-  speedMin: 6
-  speedMax: 18
-  glideMin: 18
-  glideMax: 30
+  speedMin: 8
+  speedMax: 12
+  glideMin: 16
+  glideMax: 25
   playerBow: {fileID: 6010464711808315676}
-  damageMin: 10
-  damageMax: 30
+  damageMin: 0.1
+  damageMax: 0.3
   chargeMin: 1.5
   chargeMax: 0.5
 --- !u!114 &7127428152455267314
